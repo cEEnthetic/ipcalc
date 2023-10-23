@@ -8,7 +8,7 @@ A simple ip calculator, featuring:
     - number of hosts calculator
 - cli interface, which features:
     - shorthand for ip input (eg.: 192.168.100 == 192.168.100.0)
-    - support for prefixed ip input (192.168.100.1/24)
+    - support for prefixed ip input (eg.: 192.168.100.1/24)
     - finding hosts by index
     - output, outputting: mask, index, network, broadcast, number of hosts
 

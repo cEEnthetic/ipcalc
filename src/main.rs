@@ -82,7 +82,7 @@ fn user_input_ip() -> (u32, u32) {
     println!("Ip address: ");
     let mut ip = String::new();
     std::io::stdin().read_line(&mut ip).expect("Not good");
-    let mask = ip
+    let mut prefix = ip
         .split("/")
         .last()
         .unwrap_or("69")
@@ -97,7 +97,11 @@ fn user_input_ip() -> (u32, u32) {
         println!("Invalid address.");
         user_input_ip()
     } else {
-        (ip, prefix_to_u32(mask))
+        if prefix <= 0 || prefix > 31 {
+            println!("\nInvalid prefix, using default: /24");
+            prefix = 24;
+        }
+        (ip, prefix_to_u32(prefix))
     }
 }
 

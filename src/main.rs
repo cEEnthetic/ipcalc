@@ -44,7 +44,6 @@ fn dotted_to_u32(address: &str) -> Result<u32, u32> {
                 if x > 255 {
                     return Err(0);
                 };
-                println!("{}", result);
                 result += x << 8 * (3 - octet_number);
                 octet_number += 1
             }
@@ -107,7 +106,7 @@ fn user_input_mask() -> u32 {
     let mut mask = String::new();
     std::io::stdin().read_line(&mut mask).expect("Not good");
     let mask = match dotted_to_u32(mask.trim()) {
-        Ok(x) => x,
+        Ok(x) => x.reverse_bits(),
         Err(e) => e,
     };
 

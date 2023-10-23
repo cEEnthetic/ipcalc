@@ -44,7 +44,8 @@ fn dotted_to_u32(address: &str) -> Result<u32, u32> {
                 if x > 255 {
                     return Err(0);
                 };
-                result += x << 8 * octet_number;
+                println!("{}", result);
+                result += x << 8 * (3 - octet_number);
                 octet_number += 1
             }
             Err(_) => return Err(0),
@@ -97,7 +98,7 @@ fn user_input_ip() -> (u32, u32) {
         println!("Invalid address.");
         user_input_ip()
     } else {
-        (ip, mask)
+        (ip, prefix_to_u32(mask))
     }
 }
 
@@ -139,14 +140,14 @@ fn ip_output(ip: u32, mask: u32) {
 
 //---------- This is where the tests start ----------
 fn main() {
-    let (ip, mask) = user_input_ip();
+    let (ip, mut mask) = user_input_ip();
     if mask == 0 {
-        let mask = user_input_mask();
+        mask = user_input_mask();
     }
     ip_output(ip, mask);
 
     loop {
-        println!("find host: ");
+        println!("\nfind host: ");
         ip_output(user_input_find_host(ip, mask), mask)
     }
 }
